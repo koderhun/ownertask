@@ -1,3 +1,7 @@
-export default function Home() {
-  return <h1>Public Home Page</h1>
+'use client'
+
+import {LoginForm} from '@/components'
+
+export default function LoginPage() {
+  return <LoginForm />
 }

@@ -1,6 +1,7 @@
 import { SignJWT } from "jose";
 import { NextResponse } from "next/server";
 import { getJwtSecretKey } from "@/libs/auth";
+import {users} from '@/constants'
 
 interface Request {
   json(): Promise<any>;
@@ -13,9 +14,12 @@ interface Body {
 
 export async function POST(request: Request): Promise<NextResponse> {
   const body: Body = await request.json();
-  console.log('bbbody ', body)
+  console.log('body ', body)
 
-  if (body.username === "admin" && body.password === "admin") {
+  const valid = users.some((user) => user.email === body.username && user.password === body.password);
+  console.log('valid ', valid)
+
+  if (valid) {
     const token = await new SignJWT({
       username: body.username,
       role: "admin", 
