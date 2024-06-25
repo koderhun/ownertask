@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true}>
         <Header />
-        <main className="container mx-auto px-4">{children}</main>
+        <main className=" mx-auto px-4 max-w-screen-xl">{children}</main>
       </body>
     </html>
   )
