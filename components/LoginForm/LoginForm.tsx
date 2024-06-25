@@ -51,7 +51,7 @@ export const LoginForm: FC = () => {
               name="username"
               className="bg-gray-200 rounded pl-12 py-2 md:py-4 focus:outline-none w-full"
               placeholder="Email"
-              pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+              pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
               required
             />
           </div>
@@ -65,6 +65,9 @@ export const LoginForm: FC = () => {
               name="password"
               className="bg-gray-200 rounded pl-12 py-2 md:py-4 focus:outline-none w-full"
               placeholder="Password"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+              required
             />
           </div>
           <button
@@ -81,6 +84,13 @@ export const LoginForm: FC = () => {
               password
             </div>
           )}
+
+          <div
+            className="mt-8 bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3"
+            role="alert">
+            <p className="font-bold">user@ya.ru</p>
+            <p className="text-sm">123456Up</p>
+          </div>
         </form>
       </div>
     </div>

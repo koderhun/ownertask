@@ -2,7 +2,7 @@ import {NextResponse, NextRequest} from 'next/server'
 import {verifyJwtToken} from '@/libs/auth'
 import type {JWTPayload} from 'jose'
 
-const AUTH_PAGES: string[] = ['/' ]
+const AUTH_PAGES: string[] = []
 
 const isAuthPages = (url: string): boolean =>
   AUTH_PAGES.some((page) => page.startsWith(url))
@@ -33,7 +33,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     searchParams.set('next', nextUrl.pathname)
 
     const response: NextResponse = NextResponse.redirect(
-      new URL(`/?${searchParams}`, url)
+      new URL(`?${searchParams}`, url)
     )
     response.cookies.delete('token')
 
@@ -43,4 +43,4 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   return NextResponse.next()
 }
 
-export const config = {matcher: ['/', '/profile/:path*']}
+export const config = {matcher: ['/coins', '/profile/:path*']}
