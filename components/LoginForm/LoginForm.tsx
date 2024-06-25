@@ -24,7 +24,7 @@ export const LoginForm: FC = () => {
 
     if (success) {
       const nextUrl = searchParams.get('next')
-      router.push(nextUrl ?? '/profile')
+      router.push(nextUrl ?? '/coins')
       router.refresh()
     } else {
       console.error('Incorrect username or password')
