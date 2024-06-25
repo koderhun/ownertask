@@ -1,9 +1,10 @@
 'use client'
 import React, {FC, FormEvent} from 'react'
-import {useRouter} from 'next/navigation'
+import {useRouter, useSearchParams} from 'next/navigation'
 
 export const LoginForm: FC = () => {
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
@@ -12,13 +13,16 @@ export const LoginForm: FC = () => {
     const username = formData.get('username') as string
     const password = formData.get('password') as string
 
-    const {ok} = await fetch('/api/login', {
+    const res = await fetch('/api/login', {
       method: 'POST',
       body: JSON.stringify({username, password}),
     })
 
-    if (ok) {
-      router.push('/')
+    const {success} = await res.json()
+
+    if (success) {
+      const nextUrl = searchParams.get('next')
+      router.push(nextUrl ?? '/')
       router.refresh()
     } else {
       alert('Login failed')
@@ -41,6 +45,7 @@ export const LoginForm: FC = () => {
             <input
               type="text"
               id="username"
+              name="username"
               className="bg-gray-200 rounded pl-12 py-2 md:py-4 focus:outline-none w-full"
               placeholder="Username"
             />
@@ -52,11 +57,14 @@ export const LoginForm: FC = () => {
             <input
               type="password"
               id="password"
+              name="password"
               className="bg-gray-200 rounded pl-12 py-2 md:py-4 focus:outline-none w-full"
               placeholder="Password"
             />
           </div>
-          <button className="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full rounded">
+          <button
+            type="submit"
+            className="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full rounded">
             Login
           </button>
         </form>

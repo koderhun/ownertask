@@ -1,5 +1,5 @@
 'use client'
 
 export default function ProfilePage() {
-  return <h1>PRofile</h1>
+  return <h1>Private PRofile</h1>
 }

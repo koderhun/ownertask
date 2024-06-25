@@ -13,16 +13,16 @@ interface Body {
 
 export async function POST(request: Request): Promise<NextResponse> {
   const body: Body = await request.json();
+  console.log('bbbody ', body)
 
-  // Make that below if condition as your own backend api call to validate user
   if (body.username === "admin" && body.password === "admin") {
     const token = await new SignJWT({
       username: body.username,
-      role: "admin", // Set your own roles
+      role: "admin", 
     })
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()
-      .setExpirationTime("30s") // Set your own expiration time
+      .setExpirationTime("30s") 
       .sign(getJwtSecretKey());
 
     const response = NextResponse.json(

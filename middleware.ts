@@ -43,4 +43,4 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   return NextResponse.next()
 }
 
-export const config = {matcher: ['/login', '/panel/:path*']}
+export const config = {matcher: ['/login', '/profile/:path*']}

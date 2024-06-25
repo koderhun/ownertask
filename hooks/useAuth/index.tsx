@@ -1,4 +1,5 @@
-import React, {FC, useState, useEffect} from 'react'
+import React from 'react'
+
 import Cookies from 'universal-cookie'
 import {verifyJwtToken} from '@/libs/auth'
 
@@ -6,7 +7,7 @@ interface Cookie {
   value: string
 }
 
-export const fromServer = async (): Promise<any> => {
+const fromServer = async (): Promise<any> => {
   const cookies = require('next/headers').cookies
   console.log(cookies, 'cookies')
   const cookieList = cookies()
@@ -17,7 +18,7 @@ export const fromServer = async (): Promise<any> => {
 }
 
 export function useAuth() {
-  const [auth, setAuth] = useState<any>(null)
+  const [auth, setAuth] = React.useState<any>(null)
 
   const getVerifiedtoken = async () => {
     const cookies = new Cookies()
@@ -26,7 +27,7 @@ export function useAuth() {
     setAuth(verifiedToken)
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     getVerifiedtoken()
   }, [])
 

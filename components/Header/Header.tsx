@@ -1,18 +1,10 @@
-'use client'
-import React, {FC, useEffect, useState} from 'react'
 import {useAuth} from '@/hooks/useAuth'
 import Link from 'next/link'
 
-export function Header({}) {
-  const [auth, setAuth] = useState<any>(null)
-  const getStatus = async () => {
-    const auth = await useAuth.fromServer()
-    setAuth(auth)
-  }
-  useEffect(() => {
-    getStatus()
-  }, [])
-  console.log('aaa', auth)
+export async function Header() {
+  const auth = await useAuth.fromServer()
+
+  console.log(auth)
 
   return (
     <header>
@@ -31,9 +23,9 @@ export function Header({}) {
           <div className="flex items-center lg:order-2">
             {auth ? (
               <Link
-                href="/panel"
+                href="/profile"
                 className="text-red-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
-                Panel (Protected Route)
+                Private Profile
               </Link>
             ) : (
               <Link
@@ -42,12 +34,6 @@ export function Header({}) {
                 Login
               </Link>
             )}
-
-            <Link
-              className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-              href="/">
-              Log out
-            </Link>
           </div>
           <div
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
@@ -63,9 +49,9 @@ export function Header({}) {
               </li>
               <li>
                 <a
-                  href="/panel"
+                  href="/profile"
                   className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                  Panel
+                  Profile
                 </a>
               </li>
             </ul>
